@@ -72,7 +72,7 @@
             el.dataset.animated = '1';
             const target = parseInt(el.dataset.target) || 0;
             animateCounter(el, target, 1200);
-
+          }
         });
       }, { threshold: 0.2 });
       scrollCounters.forEach(el => counterObserver.observe(el));
