@@ -1094,7 +1094,7 @@ input, textarea, select { font-family: inherit; }
   transition: opacity 0.5s ease;
 }
 .preloader.hide { opacity: 0; pointer-events: none; }
-body.loading { overflow: hidden !important; position: fixed; width: 100%; height: 100%; }
+body.loading { overflow: hidden !important; }
 .preloader-logo {
   font-family: var(--font-heading);
   font-size: 32px;
