@@ -4,8 +4,7 @@
   // ===== PRELOADER =====
   const preloader = document.getElementById('preloader');
   document.body.classList.add('loading');
-  // Save scroll position and block scrolling
-  const scrollY = window.scrollY;
+  const savedScrollY = window.scrollY;
   function hidePreloader() {
     if (preloader) {
       preloader.classList.add('hide');
@@ -13,7 +12,7 @@
       document.body.style.position = '';
       document.body.style.width = '';
       document.body.style.height = '';
-      window.scrollTo(0, 0);
+      // Don't force scroll to top — restore previous position
       setTimeout(() => preloader.remove(), 400);
     }
   }
@@ -35,8 +34,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('anim-show');
-        } else {
-          entry.target.classList.remove('anim-show');
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
@@ -74,10 +72,7 @@
             el.dataset.animated = '1';
             const target = parseInt(el.dataset.target) || 0;
             animateCounter(el, target, 1200);
-          } else {
-            el.textContent = '0';
-            el.dataset.animated = '';
-          }
+
         });
       }, { threshold: 0.2 });
       scrollCounters.forEach(el => counterObserver.observe(el));
